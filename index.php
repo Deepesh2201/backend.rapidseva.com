@@ -50,8 +50,8 @@ else
  {
 	 $_SESSION['username'] = $username;
 	 
-	 $msg = 'Login Successfully!!!';
-	 header("refresh:3;url=dashboard.php");
+	 $msg = 'Login Successfully!!!<br>Redirecting To Dashboard';
+	 header("refresh:1;url=dashboard.php");
  }
  else 
  {

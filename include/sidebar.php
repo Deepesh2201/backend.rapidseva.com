@@ -152,6 +152,10 @@
 					<li class="menu-header">Payment Gateway Section</li>
 					<li><a class="nav-link" href="list_payment_list.php"><i class="fas fa-money-bill-alt"></i> <span>List Payment Gateway</span></a></li>
 					
+                    <li class="menu-header">Coupons/Offers Section</li>
+					<li><a class="nav-link" href="list_coupons.php"><i class="fas fa-solid fa-tags"></i> <span>List Coupons</span></a></li>
+					
+
 					<li class="menu-header">Payout Section</li>
 					<li><a class="nav-link" href="list_payout.php"><i class="fas fa-money-bill-wave"></i> <span>List Partner Payout</span></a></li>
 					

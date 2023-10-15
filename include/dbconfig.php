@@ -5,7 +5,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 try {
-   $mysqli = new mysqli("localhost", "shinewel_rapidseva", "shinewel_rapidseva", "shinewel_rapidseva");
+   $mysqli = new mysqli("localhost", "root", "", "shinewel_rapidseva");
+  //  $mysqli = new mysqli("localhost", "shinewel_rapidseva", "shinewel_rapidseva", "shinewel_rapidseva");
   $mysqli->set_charset("utf8mb4");
 } catch(Exception $e) {
   error_log($e->getMessage());
