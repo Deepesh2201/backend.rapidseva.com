@@ -32,7 +32,7 @@ if ($data['coupon'] == '') {
     $countRow = $countQuery->fetch_assoc();
     $usageCount = $countRow['usage_count'];
 
-        if ($couponLimit >= $usageCount) {
+        if ($usageCount >= $couponLimit) {
             $returnArr = array("ResponseCode" => "401", "Result" => "false", "ResponseMsg" => "Coupon Already Used");
         } else {
             $returnArr = array("ResponseCode" => "200", "Result" => "true", "ResponseMsg" => "Coupon Found", "CouponID" => $couponId, "CouponLimit" => $couponLimit, "DiscPer" => $discPer, "MaxDisc" => $maxDisc,"counts" => $usageCount);
