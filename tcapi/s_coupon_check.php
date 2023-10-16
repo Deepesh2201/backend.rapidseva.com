@@ -35,7 +35,7 @@ if ($data['coupon'] == '') {
         if ($usageCount >= $couponLimit) {
             $returnArr = array("ResponseCode" => "401", "Result" => "false", "ResponseMsg" => "Coupon Already Used!");
         } else {
-            $returnArr = array("ResponseCode" => "200", "Result" => "true", "ResponseMsg" => "Coupon Applied. Save $discPer% upto ₹$maxDisc)", "CouponID" => $couponId, "CouponLimit" => $couponLimit, "DiscPer" => $discPer, "MaxDisc" => $maxDisc,"counts" => $usageCount);
+            $returnArr = array("ResponseCode" => "200", "Result" => "true", "ResponseMsg" => "Coupon Applied. Save $discPer% upto ₹$maxDisc", "CouponID" => $couponId, "CouponLimit" => $couponLimit, "DiscPer" => $discPer, "MaxDisc" => $maxDisc,"counts" => $usageCount);
         }
 
         // Now, you have the 'id' for the matching coupon code
