@@ -12,7 +12,7 @@ if ($data['coupon'] == '') {
     $coupon = strip_tags(mysqli_real_escape_string($mysqli, $data['coupon']));
 
 
-    $chek = $mysqli->query("SELECT * from tbl_coupon where coupon_code = $coupon");
+    $chek = $mysqli->query("SELECT * from tbl_coupon where coupon_code = '$coupon'");
     if ($chek->num_rows > 0) {
         // The coupon exists; now, retrieve its 'id'
         $row = $chek->fetch_assoc();
