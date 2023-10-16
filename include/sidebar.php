@@ -154,6 +154,7 @@
 					
                     <li class="menu-header">Coupons/Offers Section</li>
 					<li><a class="nav-link" href="list_coupons.php"><i class="fas fa-solid fa-tags"></i> <span>List Coupons</span></a></li>
+					<li><a class="nav-link" href="list_coupons_usage.php"><i class="fas fa-solid fa-tags"></i> <span>List Coupons Usage</span></a></li>
 					
 
 					<li class="menu-header">Payout Section</li>
