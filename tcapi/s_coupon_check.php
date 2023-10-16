@@ -1,6 +1,7 @@
 <?php
 require dirname(dirname(__FILE__)) . '/include/dbconfig.php';
 $data = json_decode(file_get_contents('php://input'), true);
+$userId = $data['userId'];
 
 if ($data['userId'] == '') {
     $returnArr = array("ResponseCode" => "401", "Result" => "false", "ResponseMsg" => "Something went wrong!");
@@ -22,17 +23,19 @@ if ($data['coupon'] == '') {
         $maxDisc = $row['max_disc'];
         // $couponId = $row['id'];
 
-        $count = $mysqli->query("SELECT tc.*, COUNT(tcu.id) AS usage_count
-        FROM tbl_coupon tc 
-        LEFT JOIN tbl_coupon_usage tcu ON tc.id = tcu.coupon_id
-        WHERE tc.coupon_code = '$coupon'
-        AND tcu.user_id = '$userId'
-        GROUP BY tc.id
+        // $count = $mysqli->query("SELECT COUNT(id) AS usage_count from tbl_coupon_usage where coupon_id = '$couponId' AND user_id = '$userId' ");
+        $countQuery = $mysqli->query("SELECT COUNT(id) AS usage_count
+        FROM tbl_coupon_usage
+        WHERE coupon_id = '$couponId'
+        AND user_id = '$userId'
         ");
-        if ($couponLimit >= $count) {
+    $countRow = $countQuery->fetch_assoc();
+    $usageCount = $countRow['usage_count'];
+
+        if ($couponLimit >= $usageCount) {
             $returnArr = array("ResponseCode" => "401", "Result" => "false", "ResponseMsg" => "Coupon Already Used");
         } else {
-            $returnArr = array("ResponseCode" => "200", "Result" => "true", "ResponseMsg" => "Coupon Found", "CouponID" => $couponId, "CouponLimit" => $couponLimit, "DiscPer" => $discPer, "MaxDisc" => $maxDisc,"counts" => $count);
+            $returnArr = array("ResponseCode" => "200", "Result" => "true", "ResponseMsg" => "Coupon Found", "CouponID" => $couponId, "CouponLimit" => $couponLimit, "DiscPer" => $discPer, "MaxDisc" => $maxDisc,"counts" => $usageCount);
         }
 
         // Now, you have the 'id' for the matching coupon code
