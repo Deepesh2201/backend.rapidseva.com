@@ -58,6 +58,8 @@ else
 		$pp['add_total'] = $row['add_total'];
 		$pp['r_credit'] = $row['r_credit'];
 		$pp['wal_amt'] = $row['wal_amt'];
+		$pp['coupon_id'] = $row['coupon_id'];
+		$pp['coupon_amt'] = $row['coupon_amt'];
 		$pp['Order_Total'] = $row['o_total'];
 		 
 		
