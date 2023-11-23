@@ -5,18 +5,18 @@ $data = json_decode(file_get_contents('php://input'), true);
 ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 
 // Function to save an image and get its path
-function saveImageAndGetPath($imageData, $originalFileName)
+function saveImageAndGetPath($imageData)
 {
-    $uploadDir = '/'; // Set the path to your upload folder on the server
+    $uploadDir = '/assets'; // Set the path to your upload folder on the server
 
     // Decode the base64-encoded image data
     $imageData = base64_decode($imageData);
 
     // Extract the file extension from the original file name
-    $originalExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+    $originalExtension = pathinfo($imageData, PATHINFO_EXTENSION);
 
     // Generate a unique filename with the same extension
-    $uniqueFilename = uniqid() . '_' . $originalFileName;
+    $uniqueFilename = uniqid() . '_' . $imageData;
 
     // Create the full path to save the file
     $imagePath = $uploadDir . $uniqueFilename . '.' . $originalExtension;
@@ -53,10 +53,10 @@ else
     //  $aadharBackImage = strip_tags(mysqli_real_escape_string($mysqli, $data['aadharBackImage']));
     //  $panCardImage = strip_tags(mysqli_real_escape_string($mysqli, $data['panCardImage']));
     //  $localAddressImage = strip_tags(mysqli_real_escape_string($mysqli, $data['localAddressImage']));
-    $aadharFrontImage = saveImageAndGetPath($data['aadharFrontImage'], 'aadhar_front');
-    $aadharBackImage = saveImageAndGetPath($data['aadharBackImage'], 'aadhar_back');
-    $panCardImage = saveImageAndGetPath($data['panCardImage'], 'pan_card');
-    $localAddressImage = saveImageAndGetPath($data['localAddressImage'], 'local_address');
+    $aadharFrontImage = saveImageAndGetPath($data['aadharFrontImage']);
+    $aadharBackImage = saveImageAndGetPath($data['aadharBackImage']);
+    $panCardImage = saveImageAndGetPath($data['panCardImage']);
+    $localAddressImage = saveImageAndGetPath($data['localAddressImage']);
 
 
      
