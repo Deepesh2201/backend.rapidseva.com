@@ -7,7 +7,7 @@ ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_report
 // Function to save an image and get its path
 function saveImageAndGetPath($imageData, $originalFileName)
 {
-    $uploadDir = 'assets/'; // Set the path to your upload folder on the server
+    $uploadDir = '/'; // Set the path to your upload folder on the server
 
     // Decode the base64-encoded image data
     $imageData = base64_decode($imageData);
@@ -19,7 +19,7 @@ function saveImageAndGetPath($imageData, $originalFileName)
     $uniqueFilename = uniqid() . '_' . $originalFileName;
 
     // Create the full path to save the file
-    $imagePath = $uploadDir . $uniqueFilename;
+    $imagePath = $uploadDir . $uniqueFilename . '.' . $originalExtension;
 
     // Save the decoded image data to the specified path
     file_put_contents($imagePath, $imageData);
@@ -27,6 +27,7 @@ function saveImageAndGetPath($imageData, $originalFileName)
     // Return the unique filename with extension to be stored in the database
     return $uniqueFilename . '.' . $originalExtension;
 }
+
 
 
 
