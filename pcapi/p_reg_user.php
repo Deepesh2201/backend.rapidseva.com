@@ -7,7 +7,7 @@ ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_report
 // Function to save an image and get its path
 function saveImageAndGetPath($imageData, $originalFileName)
 {
-    $uploadDir = '/'; // Set the path to your upload folder on the server
+    $uploadDir = 'assets/'; // Set the path to your upload folder on the server
 
     // Decode the base64-encoded image data
     $imageData = base64_decode($imageData);
