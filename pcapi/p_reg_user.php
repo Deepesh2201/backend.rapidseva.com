@@ -23,8 +23,9 @@ else
 	 $accountHolder = strip_tags(mysqli_real_escape_string($mysqli,$data['accountHolder']));
 	 $ifscCode = strip_tags(mysqli_real_escape_string($mysqli,$data['ifscCode']));
 	 $bankName = strip_tags(mysqli_real_escape_string($mysqli,$data['bankName']));
-	 $aadharFrontImage = strip_tags(mysqli_real_escape_string($mysqli,$data['aadharFrontImage']));
+     $aadharFrontImage = strip_tags(mysqli_real_escape_string($mysqli, $data['aadharFrontImage']));
     
+
     
      
     $checkmob = $mysqli->query("select * from partner where mobile=".$mobile."");
@@ -36,7 +37,7 @@ else
     }
      else if($checkemail->num_rows != 0)
     {
-        $returnArr = array("ResponseCode"=>"401","Result"=>"false","ResponseMsg"=>"Email Address Already Used!");
+        $returnArr = array("ResponseCode"=>"401","Result"=>"false","ResponseMsg"=>$aadharFrontImage);
     }
     else
     {
@@ -50,7 +51,7 @@ else
    $h = new Common();
 	  $check = $h->InsertData_Api_Id($field_values,$data_values,$table);
   $c = $mysqli->query("select * from partner where id=".$check."")->fetch_assoc();
-  $returnArr = array("PartnerLogin"=>$c,"ResponseCode"=>"200","Result"=>"true","ResponseMsg"=>$aadharFrontImage);
+  $returnArr = array("PartnerLogin"=>$c,"ResponseCode"=>"200","Result"=>"true","ResponseMsg"=>"Registration Successfull!");
   
 	   
     
