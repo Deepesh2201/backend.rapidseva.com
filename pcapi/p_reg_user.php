@@ -49,14 +49,14 @@ else
 	 $accountHolder = strip_tags(mysqli_real_escape_string($mysqli,$data['accountHolder']));
 	 $ifscCode = strip_tags(mysqli_real_escape_string($mysqli,$data['ifscCode']));
 	 $bankName = strip_tags(mysqli_real_escape_string($mysqli,$data['bankName']));
-    //  $aadharFrontImage = strip_tags(mysqli_real_escape_string($mysqli, $data['aadharFrontImage']));
-    //  $aadharBackImage = strip_tags(mysqli_real_escape_string($mysqli, $data['aadharBackImage']));
-    //  $panCardImage = strip_tags(mysqli_real_escape_string($mysqli, $data['panCardImage']));
-    //  $localAddressImage = strip_tags(mysqli_real_escape_string($mysqli, $data['localAddressImage']));
-    $aadharFrontImage = saveImageAndGetPath($data['aadharFrontImage']);
-    $aadharBackImage = saveImageAndGetPath($data['aadharBackImage']);
-    $panCardImage = saveImageAndGetPath($data['panCardImage']);
-    $localAddressImage = saveImageAndGetPath($data['localAddressImage']);
+     $aadharFrontImage = strip_tags(mysqli_real_escape_string($mysqli, $data['aadharFrontImage']));
+     $aadharBackImage = strip_tags(mysqli_real_escape_string($mysqli, $data['aadharBackImage']));
+     $panCardImage = strip_tags(mysqli_real_escape_string($mysqli, $data['panCardImage']));
+     $localAddressImage = strip_tags(mysqli_real_escape_string($mysqli, $data['localAddressImage']));
+    // $aadharFrontImage = saveImageAndGetPath($data['aadharFrontImage']);
+    // $aadharBackImage = saveImageAndGetPath($data['aadharBackImage']);
+    // $panCardImage = saveImageAndGetPath($data['panCardImage']);
+    // $localAddressImage = saveImageAndGetPath($data['localAddressImage']);
 
 
      
