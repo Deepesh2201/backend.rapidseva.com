@@ -68,10 +68,11 @@ else
     }
 
 // Use the saveImageAndGetPath function
-$aadharFrontImage = saveImageAndGetPath($data['aadharFrontImage'], $uploadDir);
-$aadharBackImage = saveImageAndGetPath($data['aadharBackImage'], $uploadDir);
-$panCardImage = saveImageAndGetPath($data['panCardImage'], $uploadDir);
-$localAddressImage = saveImageAndGetPath($data['localAddressImage'], $uploadDir);
+$aadharFrontImage = saveImageAndGetPath(file_get_contents($data['aadharFrontImage']), $uploadDir);
+$aadharBackImage = saveImageAndGetPath(file_get_contents($data['aadharBackImage']), $uploadDir);
+$panCardImage = saveImageAndGetPath(file_get_contents($data['panCardImage']), $uploadDir);
+$localAddressImage = saveImageAndGetPath(file_get_contents($data['localAddressImage']), $uploadDir);
+
 
 
 
