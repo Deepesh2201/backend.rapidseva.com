@@ -58,7 +58,7 @@ else
    $h = new Common();
 	  $check = $h->InsertData_Api_Id($field_values,$data_values,$table);
   $c = $mysqli->query("select * from partner where id=".$check."")->fetch_assoc();
-  $returnArr = array("PartnerLogin"=>$c,"ResponseCode"=>"200","Result"=>"true","ResponseMsg"=>$aadharBackImage);
+  $returnArr = array("PartnerLogin"=>$c,"ResponseCode"=>"200","Result"=>"true","ResponseMsg"=>"Registration Successfull");
   
 	   
     
