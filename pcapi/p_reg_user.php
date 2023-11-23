@@ -4,6 +4,29 @@ require dirname( dirname(__FILE__) ).'/include/Common.php';
 $data = json_decode(file_get_contents('php://input'), true);
 ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 
+// Function to save an image and get its path
+function saveImageAndGetPath($imageData, $imageNamePrefix)
+{
+    $uploadDir = '/assets/partner/documents/upload/'; // Set the path to your upload folder on the server
+
+    // Decode the base64-encoded image data
+    $imageData = base64_decode($imageData);
+
+    // Extract the file extension from the original file name
+    $originalExtension = pathinfo($imageNamePrefix, PATHINFO_EXTENSION);
+
+    // Generate a unique filename with the same extension
+    $uniqueFilename = $imageNamePrefix . '_' . uniqid() . '.' . $originalExtension;
+
+    // Create the full path to save the file
+    $imagePath = $uploadDir . $uniqueFilename;
+
+    // Save the decoded image data to the specified path
+    file_put_contents($imagePath, $imageData);
+
+    // Return the unique filename to be stored in the database
+    return $uniqueFilename;
+}
 
 if($data['name'] == '' or $data['email'] == '' or $data['mobile'] == ''   or $data['password'] == '' or $data['ccode'] == '' or $data['city'] == '' or $data['address'] == '')
 {
@@ -32,6 +55,7 @@ else
     $panCardImage = saveImageAndGetPath($data['panCardImage'], 'pan_card');
     $localAddressImage = saveImageAndGetPath($data['localAddressImage'], 'local_address');
 
+
      
     
      
@@ -58,32 +82,10 @@ else
    $h = new Common();
 	  $check = $h->InsertData_Api_Id($field_values,$data_values,$table);
   $c = $mysqli->query("select * from partner where id=".$check."")->fetch_assoc();
-  $returnArr = array("PartnerLogin"=>$c,"ResponseCode"=>"200","Result"=>"true","ResponseMsg"=>"Registration Successfull");
+  $returnArr = array("PartnerLogin"=>$c,"ResponseCode"=>"200","Result"=>"true","ResponseMsg"=>$aadharBackImage);
   
 	   
     
-}
-// Function to save an image and get its path
-function saveImageAndGetPath($imageData, $imageNamePrefix) {
-    $uploadDir = '/assets/partner/documents/upload/'; // Set the path to your upload folder on the server
-
-    // Decode the base64-encoded image data
-    $imageData = base64_decode($imageData);
-
-    // Extract the file extension from the original file name
-    $originalExtension = pathinfo($imageNamePrefix, PATHINFO_EXTENSION);
-
-    // Generate a unique filename with the same extension
-    $uniqueFilename = $imageNamePrefix . '_' . uniqid() . '.' . $originalExtension;
-
-    // Create the full path to save the file
-    $imagePath = $uploadDir . $uniqueFilename;
-
-    // Save the decoded image data to the specified path
-    file_put_contents($imagePath, $imageData);
-
-    // Return the unique filename to be stored in the database
-    return $uniqueFilename;
 }
 }
 
