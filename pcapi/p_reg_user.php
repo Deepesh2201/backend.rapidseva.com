@@ -24,6 +24,9 @@ else
 	 $ifscCode = strip_tags(mysqli_real_escape_string($mysqli,$data['ifscCode']));
 	 $bankName = strip_tags(mysqli_real_escape_string($mysqli,$data['bankName']));
      $aadharFrontImage = strip_tags(mysqli_real_escape_string($mysqli, $data['aadharFrontImage']));
+     $aadharBackImage = strip_tags(mysqli_real_escape_string($mysqli, $data['aadharBackImage']));
+     $panCardImage = strip_tags(mysqli_real_escape_string($mysqli, $data['panCardImage']));
+     $localAddressImage = strip_tags(mysqli_real_escape_string($mysqli, $data['localAddressImage']));
     
      
     
@@ -46,12 +49,12 @@ else
 	     $timestamp = date("Y-m-d H:i:s");
 		   
 		   $table="partner";
-  $field_values=array("name","email","mobile","rdate","password","ccode","city","address","bank_account_number","account_holder_name","bank_ifsc_code","bank_name");
-  $data_values=array("$name","$email","$mobile","$timestamp","$password","$ccode","$city","$address","$accountNumber","$accountHolder","$ifscCode","$bankName");
+  $field_values=array("name","email","mobile","rdate","password","ccode","city","address","bank_account_number","account_holder_name","bank_ifsc_code","bank_name","aadhar_front_image","aadhar_back_image","pan_card_image","local_address_image");
+  $data_values=array("$name","$email","$mobile","$timestamp","$password","$ccode","$city","$address","$accountNumber","$accountHolder","$ifscCode","$bankName","$aadharFrontImage","$aadharBackImage","$panCardImage","$localAddressImage");
    $h = new Common();
 	  $check = $h->InsertData_Api_Id($field_values,$data_values,$table);
   $c = $mysqli->query("select * from partner where id=".$check."")->fetch_assoc();
-  $returnArr = array("PartnerLogin"=>$c,"ResponseCode"=>"200","Result"=>"true","ResponseMsg"=>$aadharFrontImage);
+  $returnArr = array("PartnerLogin"=>$c,"ResponseCode"=>"200","Result"=>"true","ResponseMsg"=>$aadharBackImage);
   
 	   
     
