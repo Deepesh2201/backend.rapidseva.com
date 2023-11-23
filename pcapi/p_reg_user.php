@@ -14,7 +14,7 @@ function saveImageAndGetPath($imageData, $uploadDir)
     }
 
     // Generate a unique filename
-    $uniqueFilename = uniqid() . '.jpg';
+    $uniqueFilename = uniqid() . '.png';
 
     // Create the full path to save the file
     $imagePath = $uploadDir . $uniqueFilename;
