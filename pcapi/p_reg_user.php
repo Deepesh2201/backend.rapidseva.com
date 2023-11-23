@@ -19,7 +19,14 @@ else
      $password = strip_tags(mysqli_real_escape_string($mysqli,$data['password']));
 	 $city = strip_tags(mysqli_real_escape_string($mysqli,$data['city']));
 	 $address = strip_tags(mysqli_real_escape_string($mysqli,$data['address']));
+	 $accountNumber = strip_tags(mysqli_real_escape_string($mysqli,$data['accountNumber']));
+	 $accountHolder = strip_tags(mysqli_real_escape_string($mysqli,$data['accountHolder']));
+	 $ifscCode = strip_tags(mysqli_real_escape_string($mysqli,$data['ifscCode']));
+	 $bankName = strip_tags(mysqli_real_escape_string($mysqli,$data['bankName']));
     
+     $returnArr = array("ResponseCode"=>"401","Result"=>"false","ResponseMsg"=>"Mobile Number Already Used!");
+
+     return false;
      
      
     $checkmob = $mysqli->query("select * from partner where mobile=".$mobile."");
