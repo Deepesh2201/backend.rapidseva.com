@@ -6,18 +6,27 @@ ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_report
 
 function saveImageAndGetPath($imageData, $uploadDir)
 {
+    // Check if the directory exists, create it if not
+    if (!file_exists($uploadDir) && !is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+
+    // Extract the base64 data from the string
+    list($type, $data) = explode(';', $imageData);
+    list(, $data) = explode(',', $data);
+
     // Decode the base64-encoded image data
-    $imageData = base64_decode($imageData);
+    $imageData = base64_decode($data);
 
     if (!$imageData) {
         die('Failed to decode image data.');
     }
 
     // Generate a unique filename
-    $uniqueFilename = uniqid() . '.png';
+    $uniqueFilename = uniqid() . '.jpg'; // You can modify the extension as needed
 
     // Create the full path to save the file
-    $imagePath = $uploadDir . $uniqueFilename;
+    $imagePath = $uploadDir . '/' . $uniqueFilename;
 
     // Save the decoded image data to the specified path
     if (!file_put_contents($imagePath, $imageData)) {
@@ -26,17 +35,6 @@ function saveImageAndGetPath($imageData, $uploadDir)
 
     return $uniqueFilename;
 }
-
-// ...
-
-// Use the saveImageAndGetPath function
-$aadharFrontImage = saveImageAndGetPath($data['aadharFrontImage'], $uploadDir);
-$aadharBackImage = saveImageAndGetPath($data['aadharBackImage'], $uploadDir);
-$panCardImage = saveImageAndGetPath($data['panCardImage'], $uploadDir);
-$localAddressImage = saveImageAndGetPath($data['localAddressImage'], $uploadDir);
-
-
-
 
 
 if($data['name'] == '' or $data['email'] == '' or $data['mobile'] == ''   or $data['password'] == '' or $data['ccode'] == '' or $data['city'] == '' or $data['address'] == '')
