@@ -12,6 +12,9 @@ function saveImageAndGetPath($imageData, $originalFileName)
     // Decode the base64-encoded image data
     $imageData = base64_decode($imageData);
 
+    // Extract the file extension from the original file name
+    $originalExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+
     // Generate a unique filename with the same extension
     $uniqueFilename = uniqid() . '_' . $originalFileName;
 
@@ -21,8 +24,8 @@ function saveImageAndGetPath($imageData, $originalFileName)
     // Save the decoded image data to the specified path
     file_put_contents($imagePath, $imageData);
 
-    // Return the unique filename to be stored in the database
-    return $uniqueFilename;
+    // Return the unique filename with extension to be stored in the database
+    return $uniqueFilename . '.' . $originalExtension;
 }
 
 
