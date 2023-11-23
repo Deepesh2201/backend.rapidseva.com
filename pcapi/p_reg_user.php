@@ -12,9 +12,6 @@ function saveImageAndGetPath($imageData, $originalFileName)
     // Decode the base64-encoded image data
     $imageData = base64_decode($imageData);
 
-    // Extract the file extension from the original file name
-    $originalExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
-
     // Generate a unique filename with the same extension
     $uniqueFilename = uniqid() . '_' . $originalFileName;
 
@@ -27,6 +24,7 @@ function saveImageAndGetPath($imageData, $originalFileName)
     // Return the unique filename to be stored in the database
     return $uniqueFilename;
 }
+
 
 
 if($data['name'] == '' or $data['email'] == '' or $data['mobile'] == ''   or $data['password'] == '' or $data['ccode'] == '' or $data['city'] == '' or $data['address'] == '')
