@@ -4,24 +4,37 @@ require dirname( dirname(__FILE__) ).'/include/Common.php';
 $data = json_decode(file_get_contents('php://input'), true);
 ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 
-// Function to save an image and get its path
 function saveImageAndGetPath($imageData, $uploadDir)
 {
     // Decode the base64-encoded image data
     $imageData = base64_decode($imageData);
 
+    if (!$imageData) {
+        die('Failed to decode image data.');
+    }
+
     // Generate a unique filename
-    $uniqueFilename = uniqid() . '.jpg'; // You can modify the extension as needed
+    $uniqueFilename = uniqid() . '.jpg';
 
     // Create the full path to save the file
-    $imagePath = $uploadDir . '/' . $uniqueFilename;
+    $imagePath = $uploadDir . $uniqueFilename;
 
     // Save the decoded image data to the specified path
-    file_put_contents($imagePath, $imageData);
+    if (!file_put_contents($imagePath, $imageData)) {
+        die('Failed to save image data to file.');
+    }
 
-    // Return the unique filename with extension to be stored in the database
     return $uniqueFilename;
 }
+
+// ...
+
+// Use the saveImageAndGetPath function
+$aadharFrontImage = saveImageAndGetPath($data['aadharFrontImage'], $uploadDir);
+$aadharBackImage = saveImageAndGetPath($data['aadharBackImage'], $uploadDir);
+$panCardImage = saveImageAndGetPath($data['panCardImage'], $uploadDir);
+$localAddressImage = saveImageAndGetPath($data['localAddressImage'], $uploadDir);
+
 
 
 
@@ -49,7 +62,12 @@ else
     //  $panCardImage = strip_tags(mysqli_real_escape_string($mysqli, $data['panCardImage']));
     //  $localAddressImage = strip_tags(mysqli_real_escape_string($mysqli, $data['localAddressImage']));
     // Define the directory where you want to store the images
-$uploadDir = '/assets/partner/documents/upload/';
+    $uploadDir = 'assets/';
+
+    // Check if the directory exists, create it if not
+    if (!file_exists($uploadDir) && !is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
 
 // Use the saveImageAndGetPath function
 $aadharFrontImage = saveImageAndGetPath($data['aadharFrontImage'], $uploadDir);
