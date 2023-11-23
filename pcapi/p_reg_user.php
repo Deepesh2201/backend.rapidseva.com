@@ -23,11 +23,15 @@ else
 	 $accountHolder = strip_tags(mysqli_real_escape_string($mysqli,$data['accountHolder']));
 	 $ifscCode = strip_tags(mysqli_real_escape_string($mysqli,$data['ifscCode']));
 	 $bankName = strip_tags(mysqli_real_escape_string($mysqli,$data['bankName']));
-     $aadharFrontImage = strip_tags(mysqli_real_escape_string($mysqli, $data['aadharFrontImage']));
-     $aadharBackImage = strip_tags(mysqli_real_escape_string($mysqli, $data['aadharBackImage']));
-     $panCardImage = strip_tags(mysqli_real_escape_string($mysqli, $data['panCardImage']));
-     $localAddressImage = strip_tags(mysqli_real_escape_string($mysqli, $data['localAddressImage']));
-    
+    //  $aadharFrontImage = strip_tags(mysqli_real_escape_string($mysqli, $data['aadharFrontImage']));
+    //  $aadharBackImage = strip_tags(mysqli_real_escape_string($mysqli, $data['aadharBackImage']));
+    //  $panCardImage = strip_tags(mysqli_real_escape_string($mysqli, $data['panCardImage']));
+    //  $localAddressImage = strip_tags(mysqli_real_escape_string($mysqli, $data['localAddressImage']));
+    $aadharFrontImage = saveImageAndGetPath($data['aadharFrontImage'], 'aadhar_front');
+    $aadharBackImage = saveImageAndGetPath($data['aadharBackImage'], 'aadhar_back');
+    $panCardImage = saveImageAndGetPath($data['panCardImage'], 'pan_card');
+    $localAddressImage = saveImageAndGetPath($data['localAddressImage'], 'local_address');
+
      
     
      
@@ -58,6 +62,28 @@ else
   
 	   
     
+}
+// Function to save an image and get its path
+function saveImageAndGetPath($imageData, $imageNamePrefix) {
+    $uploadDir = '/assets/partner/documents/upload/'; // Set the path to your upload folder on the server
+
+    // Decode the base64-encoded image data
+    $imageData = base64_decode($imageData);
+
+    // Extract the file extension from the original file name
+    $originalExtension = pathinfo($imageNamePrefix, PATHINFO_EXTENSION);
+
+    // Generate a unique filename with the same extension
+    $uniqueFilename = $imageNamePrefix . '_' . uniqid() . '.' . $originalExtension;
+
+    // Create the full path to save the file
+    $imagePath = $uploadDir . $uniqueFilename;
+
+    // Save the decoded image data to the specified path
+    file_put_contents($imagePath, $imageData);
+
+    // Return the unique filename to be stored in the database
+    return $uniqueFilename;
 }
 }
 
