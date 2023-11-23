@@ -24,8 +24,7 @@ else
 	 $ifscCode = strip_tags(mysqli_real_escape_string($mysqli,$data['ifscCode']));
 	 $bankName = strip_tags(mysqli_real_escape_string($mysqli,$data['bankName']));
     
-     
-     
+    
      
     $checkmob = $mysqli->query("select * from partner where mobile=".$mobile."");
     $checkemail = $mysqli->query("select * from partner where email='".$email."'");
@@ -45,8 +44,8 @@ else
 	     $timestamp = date("Y-m-d H:i:s");
 		   
 		   $table="partner";
-  $field_values=array("name","email","mobile","rdate","password","ccode","city","address");
-  $data_values=array("$name","$email","$mobile","$timestamp","$password","$ccode","$city","$address");
+  $field_values=array("name","email","mobile","rdate","password","ccode","city","address","bank_account_number","account_holder_name","bank_ifsc_code","bank_name");
+  $data_values=array("$name","$email","$mobile","$timestamp","$password","$ccode","$city","$address","$accountNumber","$accountHolder","$ifscCode","$bankName");
    $h = new Common();
 	  $check = $h->InsertData_Api_Id($field_values,$data_values,$table);
   $c = $mysqli->query("select * from partner where id=".$check."")->fetch_assoc();
