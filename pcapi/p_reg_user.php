@@ -26,6 +26,8 @@ if (
     $address = strip_tags(mysqli_real_escape_string($mysqli,$data['address']));
     $accountNumber = strip_tags(mysqli_real_escape_string($mysqli,$data['accountNumber']));
     $accountHolder = strip_tags(mysqli_real_escape_string($mysqli,$data['accountHolder']));
+    $ifscCode = strip_tags(mysqli_real_escape_string($mysqli,$data['ifscCode']));
+    $bankName = strip_tags(mysqli_real_escape_string($mysqli,$data['bankName']));
     
     $checkmob = $mysqli->query("select * from partner where mobile=".$mobile."");
     $checkemail = $mysqli->query("select * from partner where email='".$email."'");
